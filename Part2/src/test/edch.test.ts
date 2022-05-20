@@ -11,7 +11,7 @@ describe('ECDH test', () => {
   let eddsa: EdDSA;
   beforeAll(async () => {
     eddsa = await buildEddsaModule();
-  }, 15000);
+  }, 50000);
 
   it('should encrypt/decrypt text', async () => {
     const { privKey: bobPrivKey, pubKey: bobPubKey } = genKeypair(eddsa);
@@ -38,7 +38,7 @@ describe('ECDH test', () => {
     });
     const decryptedMessage = await decrypt(ciphertext, ecdhbobSharedKey);
     expect(decryptedMessage).toStrictEqual(aliceMessage);
-  });
+  },30000);
 
   it('should fail if decrypted with incorrect public key', async () => {
     const { privKey: bobPrivKey, pubKey: bobPubKey } = genKeypair(eddsa);
@@ -67,5 +67,5 @@ describe('ECDH test', () => {
 
     const decryptedMessage = await decrypt(ciphertext, ecdhSharedIncorrectKey);
     expect(decryptedMessage).not.toEqual(aliceMessage);
-  });
+  },30000);
 });
